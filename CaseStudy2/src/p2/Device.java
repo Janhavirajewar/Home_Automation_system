@@ -21,10 +21,6 @@ public abstract class Device implements switchable
 	    this(name, false, 0, 0); 
 		}
 	
-	public boolean isOn1() {
-		return isOn;
-	}
-
 	public String getName() {
 		return name;
 	}

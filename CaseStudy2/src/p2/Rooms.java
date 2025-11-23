@@ -40,19 +40,40 @@ public class Rooms {
 
 	}
 
-	public Device getDevice(String name) 
-	{
-		for (Device devices : devList) {
-			
-			if (devices.getName().equals(name)) {
-				System.out.println();
-				System.out.println(devices.getName() + " found in " + roomName);
-				return devices;	
-			}
-		}
-		return null;
-		
+//	public Device getDevice(String name) 
+//	{
+//		for (Device devices : devList) {
+//			
+//			if (devices.getName().equals(name)) {
+//				System.out.println();
+//				System.out.println(devices.getName() + " found in " + roomName);
+//				return devices;	
+//			}
+//		}
+//		return null;
+//		
+//	}
+	
+	
+	public Device getDevice(String name) {
+	    try {
+	        for (Device d : devList) {
+	            if (d.getName().equalsIgnoreCase(name)) {
+	              System.out.println();
+	            	System.out.println(d.getName() + " found in " + roomName);
+	            	
+	            }
+	        }
+	        
+	        throw new DeviceNotFoundException("Device '" + name + "' not found!");
+	    } 
+	    
+	    catch (DeviceNotFoundException e) {
+	        System.out.println(e.getMessage());
+	        return null;
+	    }
 	}
+
 	
 	public void removeDevice(String name) {
 		Device d =getDevice(name);
@@ -66,7 +87,8 @@ public class Rooms {
 		
 	}
 	
-	public void showAllDevices() {
+	public void showAllDevices() 
+	{
 	    if (devList.isEmpty()) {
 	        System.out.println("No devices found in " + roomName);
 	        return;

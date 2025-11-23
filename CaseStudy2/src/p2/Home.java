@@ -11,7 +11,6 @@ public class Home {
     public Home(String name)
     {
         homeName = name;
-        rooms = new ArrayList<>();
         System.out.println("Home created:" +name);
     }
 
@@ -21,26 +20,48 @@ public class Home {
         System.out.println("\nRoom added : " + r.getRoomName());
     }
 
-    public void removeRoom(String name) {
+    public void removeRoom(String name)
+    {
         Rooms temp = getRoom(name);
-        if (temp != null) {
+        if (temp != null)
+        {
             rooms.remove(temp);
             System.out.println("room removed : " + name);
-        } else {
+        } else 
+        {
             System.out.println("room not found");
         }
     }
 
+//    public Rooms getRoom(String name) {
+//        for (Rooms r : rooms) {
+//            if (r.getRoomName().equalsIgnoreCase(name)) {
+//                System.out.println("room found : " + r.getRoomName());
+//                return r;
+//            }
+//        }
+//        System.out.println("no such room found : " + name);
+//        return null;
+//    }
+    
+    
     public Rooms getRoom(String name) {
-        for (Rooms r : rooms) {
-            if (r.getRoomName().equalsIgnoreCase(name)) {
-                System.out.println("room found : " + r.getRoomName());
-                return r;
+        try {
+            for (Rooms r : rooms) {
+                if (r.getRoomName().equalsIgnoreCase(name))
+                {
+                	 System.out.println("room found : " + r.getRoomName());
+                    return r;
+                }
             }
+            throw new RoomNotFoundException("Room '" + name + "' not found!");
+        } catch (RoomNotFoundException e) {
+            System.out.println(e.getMessage());
+            return null;
         }
-        System.out.println("no such room found : " + name);
-        return null;
     }
+
+    
 
     public void showAllRooms() 
     {
